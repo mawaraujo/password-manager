@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap');
+
+$sidebar-width: 250px;
+
+body {
+  font-family: 'Urbanist', sans-serif !important;
+}
+
+.app-sidebar {
+  max-width: $sidebar-width;
+  width: $sidebar-width;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  float: left;
+}
+
+.app-content {
+  width: calc(100% - $sidebar-width);
+  min-width: calc(100% - $sidebar-width);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.app-divider {
+  margin: 1rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.089);
+}
+
+.app-nav-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.app-icon-table-size {
+  width: 20px;
+  height: 20px;
+}
+
+.app-box-item {
+  .app-right-item {
+    opacity: 0;
+  }
+
+  &:hover {
+    .app-right-item {
+      opacity: 1;
+    }
+  }
+}
+
+.selected {
+  background: rgba(255, 255, 255, 0.1);
+}
