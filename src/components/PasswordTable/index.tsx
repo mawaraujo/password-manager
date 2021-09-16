@@ -107,7 +107,7 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
     dispatch(deletePassword(passwordToDelete));
 
     dispatch(createNotification({
-      message: 'Password deleted successfully!',
+      message: `Entry deleted successfully!`,
       type: 'success',
     }));
   };
