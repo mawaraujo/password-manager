@@ -1,4 +1,4 @@
-import React, {} from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { TagState, PasswordState, Password } from '../../core/types/reducers';
 import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, Button, Text, Menu, MenuButton, Box, MenuList, MenuItem } from '@chakra-ui/react';
 import useClipboard from '../../hooks/useClipboard';
@@ -6,6 +6,7 @@ import { IconGenerator } from '../IconGenerator';
 import { useDispatch } from 'react-redux';
 import { deletePassword } from '../../core/store/actions/passwords';
 import { createNotification } from '../../core/store/actions/notifications';
+import { ConfirmActionModalComponent } from '../ConfirmActionModal';
 
 declare type Props = {
   TAG_STATE: TagState;
@@ -20,6 +21,11 @@ declare type RenderTableItemsProps = {
   handleEdit: (password: Password) => void;
   handleDelete: (password: Password) => void;
 }
+
+declare type IpasswordToDelete = [
+  passwordToDelete: any,
+  setPasswordToDelete: Dispatch<SetStateAction<Password | any>>
+]
 
 function RenderTableItems({ password, handleClipboard, handleEdit, handleDelete }: RenderTableItemsProps) {
   return (
@@ -89,13 +95,16 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
   const dispatch = useDispatch();
   const { handleClipboard } = useClipboard();
 
+  const [passwordToDelete, setPasswordToDelete]: IpasswordToDelete = useState(null);
+  const [showActionModal, setActionModal] = useState(false);
+
   const handleEdit = (password: Password) => {
     setSelectedPassword(password);
     setShowModal(true);
   };
 
-  const handleDelete = (password: Password) => {
-    dispatch(deletePassword(password));
+  const onDelete = () => {
+    dispatch(deletePassword(passwordToDelete));
 
     dispatch(createNotification({
       message: 'Password deleted successfully!',
@@ -103,40 +112,60 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
     }));
   };
 
+  const handleDelete = (password: Password) => {
+    setPasswordToDelete(password);
+    setActionModal(true);
+  };
+
+  const handleCancelDelete = () => {
+    setPasswordToDelete(null);
+    setActionModal(false);
+  };
+
   return (
-    <Table>
-      <TableCaption>List of credentials</TableCaption>
-      <Thead>
-        <Tr>
-          <Th>Entry</Th>
-          <Th>Username</Th>
-          <Th>Email</Th>
-          <Th>Password</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {
-          (TAG_STATE.selectedTag.id !== 0) ?
-            PASSWORD_STATE.passwords.map((password) => {
-              if (password.tagId === TAG_STATE.selectedTag.id) {
-                return <RenderTableItems
+    <>
+      <Table>
+        <TableCaption>List of credentials</TableCaption>
+        <Thead>
+          <Tr>
+            <Th>Entry</Th>
+            <Th>Username</Th>
+            <Th>Email</Th>
+            <Th>Password</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {
+            (TAG_STATE.selectedTag.id !== 0) ?
+              PASSWORD_STATE.passwords.map((password) => {
+                if (password.tagId === TAG_STATE.selectedTag.id) {
+                  return <RenderTableItems
+                    key={password.token}
+                    password={password}
+                    handleClipboard={handleClipboard}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit} />;
+                }
+              }) :
+              PASSWORD_STATE.passwords.map((password) => (
+                <RenderTableItems
                   key={password.token}
                   password={password}
                   handleClipboard={handleClipboard}
                   handleDelete={handleDelete}
-                  handleEdit={handleEdit} />;
-              }
-            }) :
-            PASSWORD_STATE.passwords.map((password) => (
-              <RenderTableItems
-                key={password.token}
-                password={password}
-                handleClipboard={handleClipboard}
-                handleDelete={handleDelete}
-                handleEdit={handleEdit} />
-            ))
-        }
-      </Tbody>
-    </Table>
+                  handleEdit={handleEdit} />
+              ))
+          }
+        </Tbody>
+      </Table>
+
+      { showActionModal &&
+        <ConfirmActionModalComponent
+          handleCancel={handleCancelDelete}
+          handleOK={onDelete}
+          title="Delete password"
+          description="¿Do you want to delete this password? Think twice, it will be deleted forever ☢️." />
+      }
+    </>
   );
 }
