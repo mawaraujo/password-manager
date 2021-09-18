@@ -1,8 +1,8 @@
 import React from 'react';
 import { PasswordState, TagState } from '../../core/types/reducers';
 import { connect } from 'react-redux';
-import { PasswordTableComponent } from '../PasswordTable';
-import { PasswordTableEmptyComponent } from '../PasswordTableEmpty';
+import { PasswordTableComponent } from '../PasswordTable/PasswordTable';
+import { PasswordTableEmptyComponent } from '../PasswordTable/PasswordTableEmpty';
 
 const mapStateToProps = (state: { tags: TagState, passwords: PasswordState }) => {
   return {
@@ -18,7 +18,7 @@ declare type Props = {
   setShowModal: (state: boolean) => void;
 }
 
-function PasswordGroup({ TAG_STATE, PASSWORD_STATE, setSelectedPassword, setShowModal }: Props) {
+function PasswordDatatable({ TAG_STATE, PASSWORD_STATE, setSelectedPassword, setShowModal }: Props) {
   return (
     <>{
       PASSWORD_STATE.passwords?.length ?
@@ -32,4 +32,4 @@ function PasswordGroup({ TAG_STATE, PASSWORD_STATE, setSelectedPassword, setShow
   );
 }
 
-export const PasswordGroupComponent = connect(mapStateToProps)(PasswordGroup);
+export const PasswordDatatableComponent = connect(mapStateToProps)(PasswordDatatable);

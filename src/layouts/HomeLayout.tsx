@@ -1,5 +1,5 @@
 import React, { ReactChild } from 'react';
-import { SidebarComponent } from '../components/Sidebar';
+import { SidebarComponent } from '../components/Sidebar/Sidebar';
 import { Container, Box } from '@chakra-ui/react';
 
 declare type Props = { children: ReactChild }

@@ -3,7 +3,7 @@ import { HomeLayout } from '../../layouts/HomeLayout';
 import { NotificationState } from '../../core/types/reducers';
 import { connect } from 'react-redux';
 import { useNotification } from '../../hooks/useNotification';
-import { PasswordGroupComponent } from '../../components/PasswordGroup';
+import { PasswordDatatableComponent } from '../../components/PasswordDatatable';
 import { ActionsHeaderComponent } from '../../components/ActionsHeader';
 
 const mapStateToProps = (state: { notifications: NotificationState }) => {
@@ -35,7 +35,7 @@ function HomePage({ NOTIFICATIONS_STATE }: Props) {
           setShowModal={setShowModal}
           selectedPassword={selectedPassword} />
 
-        <PasswordGroupComponent
+        <PasswordDatatableComponent
           setShowModal={setShowModal}
           setSelectedPassword={setSelectedPassword} />
       </>

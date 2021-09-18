@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Tag } from '../../core/types/reducers';
-import { iconsList } from '../../core/types/commons';
-import { IconGenerator } from '../IconGenerator';
-import useTagCreationModal from '../../hooks/useTagCreationModal';
+import { Tag } from '../../../core/types/reducers';
+import { iconsList } from '../../../core/types/commons';
+import { IconGenerator } from '../../IconGenerator';
+import useTagCreationModal from '../../../hooks/useTagCreationModal';
 
 import {
   Modal,
@@ -21,13 +21,20 @@ import {
 } from '@chakra-ui/react';
 
 declare type Props = {
-  showModal: boolean;
   tagEditSelected: Tag | null;
   setShowModal: (state: boolean) => void;
 }
 
-export function SidebarTagsCreationModal({ showModal, tagEditSelected, setShowModal }: Props) {
-  const { setTagIcon, setTagName, tagIcon, tagName, handleCreate, handleEdit } = useTagCreationModal(setShowModal);
+export function SidebarTagsCreationModalComponent({ tagEditSelected, setShowModal }: Props) {
+  const {
+    setTagIcon,
+    setTagName,
+    tagIcon,
+    tagName,
+    handleCreate,
+    handleEdit,
+  } = useTagCreationModal(setShowModal);
+
   const onClose = () => setShowModal(false);
 
   useEffect(() => {
@@ -41,7 +48,7 @@ export function SidebarTagsCreationModal({ showModal, tagEditSelected, setShowMo
   };
 
   return (
-    <Modal isOpen={showModal} onClose={onClose}>
+    <Modal isOpen={true} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>

@@ -17,7 +17,9 @@ export const tagReducer = (state = store, action: Action<{ tag: Tag }>) => {
   case CREATE_TAG:
     return {
       ...state,
-      tags: [...state.tags, action.payload.tag],
+      tags: (action.payload.tag.id !== 0 && !state.tags.some((tag) => tag.id === action.payload.tag.id)) ?
+        [...state.tags, action.payload.tag] :
+        state.tags,
     };
 
   case DELETE_TAG:

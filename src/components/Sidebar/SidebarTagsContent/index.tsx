@@ -1,7 +1,7 @@
 import React from 'react';
-import { IconGenerator } from '../IconGenerator/';
+import { IconGenerator } from '../../IconGenerator';
 import { Text, Box } from '@chakra-ui/react';
-import { Tag } from '../../core/types/reducers';
+import { Tag } from '../../../core/types/reducers';
 
 declare type Props = {
   handleSelectedTag: (tag: Tag) => void;

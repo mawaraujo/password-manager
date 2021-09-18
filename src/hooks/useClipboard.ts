@@ -11,14 +11,14 @@ export default function useClipboard() {
       navigator.clipboard.writeText(entry);
       dispatch(createNotification({
         type: 'success',
-        message: 'Item copied to your clipboard',
+        message: 'Credential copied to your clipboard',
       }));
     } catch (error) {
       console.error(error);
 
       dispatch(createNotification({
         type: 'error',
-        message: 'Item was not copied to your clipboard',
+        message: 'Credential was not copied to your clipboard',
       }));
     }
   };

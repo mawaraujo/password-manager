@@ -3,11 +3,11 @@ import { Box } from '@chakra-ui/layout';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { Notification, Tag, TagState } from '../../core/types/reducers';
-import { createTag, deleteTag, selectTag, resetSelectedTag } from '../../core/store/actions/tags';
+import { Notification, Tag, TagState } from '../../../core/types/reducers';
+import { createTag, deleteTag, selectTag, resetSelectedTag } from '../../../core/store/actions/tags';
 import { SidebarTagsMenuComponent } from '../SidebarTagsMenu';
 import { SidebarTagsContentComponent } from '../SidebarTagsContent';
-import { createNotification } from '../../core/store/actions/notifications';
+import { createNotification } from '../../../core/store/actions/notifications';
 import { Props } from './definitions';
 
 function SidebarTags(props: Props) {

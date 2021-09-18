@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { Menu, MenuItem, MenuList, MenuButton } from '@chakra-ui/menu';
-import { Tag } from '../../core/types/reducers';
+import { Tag } from '../../../core/types/reducers';
 
 declare type Props = {
   handleDeleteTag: (item: Tag) => void;

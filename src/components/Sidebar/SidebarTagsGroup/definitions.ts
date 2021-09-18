@@ -1,4 +1,4 @@
-import { TagState, Tag, Notification } from '../../core/types/reducers';
+import { TagState, Tag, Notification } from '../../../core/types/reducers';
 
 export declare type Props = {
   TAGS_STATE: TagState;

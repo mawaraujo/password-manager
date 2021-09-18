@@ -10,7 +10,9 @@ export const passwordReducer = (state = store, action: Action<{ password: Passwo
   case CREATE_PASSWORD:
     return {
       ...state,
-      passwords: [...state.passwords, action.payload.password],
+      passwords: (!state.passwords.some((pass) => pass.token === action.payload.password.token)) ?
+        [...state.passwords, action.payload.password] :
+        state.passwords,
     };
 
   case DELETE_PASSWORD:

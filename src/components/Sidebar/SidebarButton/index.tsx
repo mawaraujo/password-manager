@@ -6,7 +6,7 @@ declare type Props = {
   handleClick: () => void;
 }
 
-export function SidebarTagsCreateButtonComponent({ title, handleClick }: Props) {
+export function SidebarButton({ title, handleClick }: Props) {
   return (
     <Box px={4} mt={5} color="white">
       <Text
