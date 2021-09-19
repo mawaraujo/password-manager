@@ -34,10 +34,7 @@ declare type IviewModalItem = [
 ]
 
 function RenderTableItems({ password, handleEdit, handleDelete, setShowViewModal, setViewModalItem }: RenderTableItemsProps) {
-  const openShowModal = () => {
-    setShowViewModal(true);
-    setViewModalItem(password);
-  };
+  const openShowModal = () => (setShowViewModal(true), setViewModalItem(password));
 
   return (
     <Box
@@ -98,22 +95,13 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
   const [viewModalItem, setViewModalItem]: IviewModalItem = useState(null);
   const search = useSelector((state: any) => state.search.search);
 
-  const handleEdit = (password: Password) => {
-    setSelectedPassword(password);
-    setShowModal(true);
-  };
-
   const onDelete = () => {
     dispatch(deletePassword(passwordToDelete));
-
-    dispatch(createNotification({
-      message: `Entry deleted successfully!`,
-      type: 'success',
-    }));
-
+    dispatch(createNotification({message: `Entry deleted successfully!`, type: 'success'}));
     setActionModal(false);
   };
 
+  const handleEdit = (password: Password) => (setSelectedPassword(password), setShowModal(true));
   const handleDelete = (password: Password) => (setPasswordToDelete(password), setActionModal(true));
   const handleCancelDelete = () => (setPasswordToDelete(null), setActionModal(false));
   const closeShowModal = () => (setShowViewModal(false), setViewModalItem(null));
