@@ -71,7 +71,7 @@ export function PasswordCreationModalComponent({ showModal, passwordSelected, se
     setTagId(passwordSelected?.tagId || 0);
   }, [passwordSelected]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     if (passwordSelected) handleEdit(passwordSelected?.token);
     else handleCreate(Math.random().toString(36).substr(2, 5));
 
@@ -81,6 +81,11 @@ export function PasswordCreationModalComponent({ showModal, passwordSelected, se
     }));
 
     setSelectedPassword(null);
+  };
+
+
+  const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' && (name !== '' && password !== '')) return handleSubmit();
   };
 
   const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
@@ -94,7 +99,7 @@ export function PasswordCreationModalComponent({ showModal, passwordSelected, se
         </ModalHeader>
         <ModalCloseButton color="teal.700" />
 
-        <ModalBody>
+        <ModalBody onKeyDown={(e) => handleEnter(e)}>
           <Box
             display="flex"
             flexDirection={`${!isLargerThan800 ? 'column' : 'row'}`}>
