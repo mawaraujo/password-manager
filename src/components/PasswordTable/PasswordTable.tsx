@@ -39,7 +39,7 @@ function RenderTableItems({ password, handleClipboard, handleEdit, handleDelete 
       <Box display="flex" flexDirection="column" cursor="pointer">
         <img
           loading="lazy"
-          src={`http://www.google.com/s2/favicons?domain=${password.url}`}
+          src={`http://www.google.com/s2/favicons?domain=${password.url || 'http://github.com/'}`}
           alt={password.name}
           width="20px" />
 
