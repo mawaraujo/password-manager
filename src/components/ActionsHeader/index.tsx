@@ -75,8 +75,9 @@ function ActionsHeader({ TAG_STATE, selectedPassword, showModal, setShowModal, s
             width="100%"
             variant="solid"
             background="gray.100"
-            _placeholder={{ color: 'black' }}
-            placeholder="Quick search"
+            fontWeight="bold"
+            _placeholder={{ color: 'gray' }}
+            placeholder="&#x1F50D; Quick search"
             onChange={(e) => setSearch(e.target.value)} />
         </Box>
       </Box>

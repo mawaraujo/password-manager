@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { TagState, PasswordState, Password } from '../../core/types/reducers';
+import React, { useState } from 'react';
+import { Password } from '../../core/types/reducers';
 import { Text, Menu, MenuButton, Box, MenuList, MenuItem } from '@chakra-ui/react';
 import useClipboard from '../../hooks/useClipboard';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,44 +7,13 @@ import { deletePassword } from '../../core/store/actions/passwords';
 import { createNotification } from '../../core/store/actions/notifications';
 import { ConfirmActionModalComponent } from '../ConfirmActionModal';
 import PasswordTableModalComponent from './PasswordTableModal';
-
-declare type Props = {
-  TAG_STATE: TagState;
-  PASSWORD_STATE: PasswordState;
-  setSelectedPassword: (state: Password) => void;
-  setShowModal: (state: boolean) => void;
-}
-
-declare type RenderTableItemsProps = {
-  password: Password;
-  handleClipboard: (val: string | undefined) => void;
-  handleEdit: (password: Password) => void;
-  handleDelete: (password: Password) => void;
-  setShowViewModal: Function;
-  setViewModalItem: Function;
-}
-
-declare type IpasswordToDelete = [
-  passwordToDelete: any,
-  setPasswordToDelete: Dispatch<SetStateAction<Password | any>>
-]
-declare type IviewModalItem = [
-  viewModalItem: any,
-  setViewModalItem: Dispatch<SetStateAction<Password | any>>
-]
+import { Props, RenderTableItemsProps, IviewModalItem, IpasswordToDelete} from './definitions';
 
 function RenderTableItems({ password, handleEdit, handleDelete, setShowViewModal, setViewModalItem }: RenderTableItemsProps) {
   const openShowModal = () => (setShowViewModal(true), setViewModalItem(password));
 
   return (
-    <Box
-      p={5} mb={3}
-      display="flex"
-      justifyContent="space-between"
-      boxShadow="lg"
-      width="100%"
-      rounded="xl">
-
+    <Box p={5} mb={3} display="flex" justifyContent="space-between" boxShadow="lg" width="100%" rounded="xl">
       <Box
         display="flex"
         flexDirection="column"
@@ -114,7 +83,10 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
             PASSWORD_STATE.passwords.map((password) => {
               if (
                 password.tagId === TAG_STATE.selectedTag.id &&
-                password.name.toLowerCase().includes(search.toLowerCase())) {
+                (password.name.toLowerCase().includes(search.toLowerCase()) ||
+                password.email.toLowerCase().includes(search.toLowerCase()) ||
+                password.username?.toLowerCase().includes(search.toLowerCase()))
+              ) {
                 return <RenderTableItems
                   key={password.token}
                   password={password}
@@ -126,7 +98,10 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
               }
             }) :
             PASSWORD_STATE.passwords.map((password) => {
-              if (password.name.toLowerCase().includes(search.toLowerCase())) {
+              if (password.name.toLowerCase().includes(search.toLowerCase()) ||
+              password.email.toLowerCase().includes(search.toLowerCase()) ||
+              password.username?.toLowerCase().includes(search.toLowerCase())
+              ) {
                 return <RenderTableItems
                   key={password.token}
                   password={password}
