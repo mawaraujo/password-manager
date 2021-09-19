@@ -22,3 +22,5 @@ export const CREATE_NOTIFICATION: string = 'CREATE_NOTIFICATION';
 export const DELETE_NOTIFICATION: string = 'DELETE_NOTIFICATION';
 
 export const UPDATE_SEARCH: string = 'UPDATE_SEARCH';
+
+export const TOGGLE_SIDEBAR: string = 'TOGGLE_SIDEBAR';

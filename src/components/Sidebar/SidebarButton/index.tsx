@@ -4,11 +4,12 @@ import { Box, Text } from '@chakra-ui/react';
 declare type Props = {
   title: string;
   handleClick: () => void;
+  className?: string;
 }
 
-export function SidebarButton({ title, handleClick }: Props) {
+export function SidebarButton({ title, handleClick, className = '' }: Props) {
   return (
-    <Box px={4} mt={5} color="white">
+    <Box px={4} mt={5} color="white" className={className}>
       <Text
         onClick={handleClick}
         background="whiteAlpha.200"

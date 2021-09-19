@@ -4,6 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { updateSearch } from '../../core/store/actions/search';
 import { PasswordCreationModalComponent } from '../PasswordCreationModal';
 import { Password, TagState } from '../../core/types/reducers';
+import { toggleSidebar } from '../../core/store/actions/sidebar';
 
 const mapStateToProps = (state: { tags: TagState }) => {
   return {
@@ -21,7 +22,6 @@ declare type Props = {
 
 function ActionsHeader({ TAG_STATE, selectedPassword, showModal, setShowModal, setSelectedPassword }: Props) {
   const dispatch = useDispatch();
-
   const [search, setSearch] = useState('');
 
   const handleUpdateSearch = () => dispatch(updateSearch(search));
@@ -35,26 +35,41 @@ function ActionsHeader({ TAG_STATE, selectedPassword, showModal, setShowModal, s
       <Box
         display="flex"
         justifyContent="space-between"
+        flexDirection="column"
         backgroundColor="white"
-        borderBottom="1px"
-        borderBottomColor="gray.200"
         p={4}>
 
-        <Button
-          backgroundColor="teal.700"
-          color="white"
-          mr={4}
-          onClick={() => setShowModal(true)}>
-          Add entry
-        </Button>
+        <Box display="flex" mb={3} borderBottom="1px" borderBottomColor="gray.100" pb={3}>
+          <Button
+            mr={4}
+            backgroundColor="teal.700"
+            color="white"
+            maxWidth={150}
+            width="100%"
+            onClick={() => dispatch(toggleSidebar())}>
+            Menu
+          </Button>
 
-        <Input
-          variant="outline"
-          border="2px"
-          backgroundColor="white"
-          _focus={{ backgroundColor: 'white', borderColor: 'teal.700' }}
-          placeholder="Quick filter"
-          onChange={(e) => setSearch(e.target.value)} />
+          <Button
+            backgroundColor="teal.700"
+            color="white"
+            maxWidth={150}
+            width="100%"
+            onClick={() => setShowModal(true)}>
+            Add entry
+          </Button>
+        </Box>
+
+        <Box textAlign="right">
+          <Input
+            maxWidth={350}
+            variant="outline"
+            border="2px"
+            backgroundColor="white"
+            _focus={{ backgroundColor: 'white', borderColor: 'teal.700' }}
+            placeholder="Quick filter"
+            onChange={(e) => setSearch(e.target.value)} />
+        </Box>
       </Box>
 
       <PasswordCreationModalComponent

@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import { notificationReducer } from '../reducers/notifications.reducer';
 import { passwordReducer } from '../reducers/passwords.reducer';
 import { searchReducer } from '../reducers/search.reducer';
+import { sidebarReducer } from '../reducers/sidebar.reducer';
 import { tagReducer } from '../reducers/tags.reducer';
 
 declare global {
@@ -24,6 +25,7 @@ const reducers = combineReducers({
   tags: tagReducer,
   notifications: notificationReducer,
   search: searchReducer,
+  sidebar: sidebarReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

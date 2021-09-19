@@ -1,8 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { TagState, PasswordState, Password } from '../../core/types/reducers';
-import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, Button, Text, Menu, MenuButton, Box, MenuList, MenuItem } from '@chakra-ui/react';
+import { Text, Menu, MenuButton, Box, MenuList, MenuItem } from '@chakra-ui/react';
 import useClipboard from '../../hooks/useClipboard';
-import { IconGenerator } from '../IconGenerator';
 import { useDispatch } from 'react-redux';
 import { deletePassword } from '../../core/store/actions/passwords';
 import { createNotification } from '../../core/store/actions/notifications';
@@ -29,65 +28,37 @@ declare type IpasswordToDelete = [
 
 function RenderTableItems({ password, handleClipboard, handleEdit, handleDelete }: RenderTableItemsProps) {
   return (
-    <Tr key={password.token}>
-      <Td>{password.name}</Td>
+    <Box
+      p={5} mb={3}
+      display="flex"
+      justifyContent="space-between"
+      boxShadow="lg"
+      width="100%"
+      rounded="xl">
 
-      <Td>
-        <Text display="inline-block">{password.username}</Text>
-        <Button
-          onClick={() => handleClipboard(password.username)}
-          display="inline-block"
-          ml={3}
-          _focus={{ borderColor: 'teal.700' }}
-          h="1.75rem"
-          size="xs">
-          <IconGenerator type="clipboard" sizeClass="app-icon-table-size"/>
-        </Button>
-      </Td>
+      <Box display="flex" flexDirection="column">
+        <Box fontWeight="bold" color="gray.900" fontSize="xl" mb={1}>{password.name}</Box>
 
-      <Td>
-        <Text display="inline-block">{password.email}</Text>
-        <Button
-          onClick={() => handleClipboard(password.email)}
-          display="inline-block"
-          ml={3}
-          _focus={{ borderColor: 'teal.700' }}
-          h="1.75rem"
-          size="xs">
-          <IconGenerator type="clipboard" sizeClass="app-icon-table-size"/>
-        </Button>
-      </Td>
+        <Box marginRight={2} color="gray.500" display="flex" rounded="md">
+          <Text display="inline-block" fontWeight="bold">{password.email}</Text>
+        </Box>
+      </Box>
 
-      <Td>
-        <Text display="inline-block">*********</Text>
-        <Button
-          onClick={() => handleClipboard(password.password)}
-          display="inline-block"
-          ml={3}
-          _focus={{ borderColor: 'teal.700' }}
-          h="1.75rem"
-          size="xs">
-          <IconGenerator type="clipboard" sizeClass="app-icon-table-size"/>
-        </Button>
-      </Td>
+      <Menu>
+        <MenuButton>
+          <Box rounded="2xl" p={1} className="app-right-item" background="gray.100">
+            <svg xmlns="http://www.w3.org/2000/svg" className="app-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+            </svg>
+          </Box>
+        </MenuButton>
 
-      <Td>
-        <Menu>
-          <MenuButton>
-            <Box className="app-right-item">
-              <svg xmlns="http://www.w3.org/2000/svg" className="app-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-              </svg>
-            </Box>
-          </MenuButton>
-
-          <MenuList color="black">
-            <MenuItem fontWeight="bold" onClick={() => handleEdit(password)}>Edit</MenuItem>
-            <MenuItem fontWeight="bold" onClick={() => handleDelete(password)}>Delete</MenuItem>
-          </MenuList>
-        </Menu>
-      </Td>
-    </Tr>
+        <MenuList color="black">
+          <MenuItem fontWeight="bold" onClick={() => handleEdit(password)}>Edit</MenuItem>
+          <MenuItem fontWeight="bold" color="red.500" onClick={() => handleDelete(password)}>Delete</MenuItem>
+        </MenuList>
+      </Menu>
+    </Box>
   );
 }
 
@@ -124,40 +95,29 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
 
   return (
     <>
-      <Table>
-        <TableCaption>List of credentials</TableCaption>
-        <Thead>
-          <Tr>
-            <Th>Entry</Th>
-            <Th>Username</Th>
-            <Th>Email</Th>
-            <Th>Password</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {
-            (TAG_STATE.selectedTag.id !== 0) ?
-              PASSWORD_STATE.passwords.map((password) => {
-                if (password.tagId === TAG_STATE.selectedTag.id) {
-                  return <RenderTableItems
-                    key={password.token}
-                    password={password}
-                    handleClipboard={handleClipboard}
-                    handleDelete={handleDelete}
-                    handleEdit={handleEdit} />;
-                }
-              }) :
-              PASSWORD_STATE.passwords.map((password) => (
-                <RenderTableItems
+      <Box display="flex" className="md-column" gridGap={3} p={3}>
+        {
+          (TAG_STATE.selectedTag.id !== 0) ?
+            PASSWORD_STATE.passwords.map((password) => {
+              if (password.tagId === TAG_STATE.selectedTag.id) {
+                return <RenderTableItems
                   key={password.token}
                   password={password}
                   handleClipboard={handleClipboard}
                   handleDelete={handleDelete}
-                  handleEdit={handleEdit} />
-              ))
-          }
-        </Tbody>
-      </Table>
+                  handleEdit={handleEdit} />;
+              }
+            }) :
+            PASSWORD_STATE.passwords.map((password) => (
+              <RenderTableItems
+                key={password.token}
+                password={password}
+                handleClipboard={handleClipboard}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit} />
+            ))
+        }
+      </Box>
 
       { showActionModal &&
         <ConfirmActionModalComponent

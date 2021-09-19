@@ -51,3 +51,10 @@ export declare type NotificationState = {
 export declare type SearchState = {
   search: string;
 }
+
+/**
+ * @description Sidebar types
+ */
+export declare type SidebarState = {
+  showSidebar: Boolean;
+}

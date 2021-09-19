@@ -1,15 +1,20 @@
 import React, { useState, useEffect, SetStateAction } from 'react';
 import { SidebarTagsGroupComponent } from './SidebarTagsGroup';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
 import { SidebarButton } from './SidebarButton';
 import { SidebarTagsCreationModalComponent } from './SidebarTagsCreationModal';
 import { SettingsModalComponent } from '../SettingsModal/SettingsModal';
+import { appVersion } from '../../core/types/commons';
+import { useDispatch } from 'react-redux';
+import { toggleSidebar } from '../../core/store/actions/sidebar';
 
 declare type Props = {
   className: string;
 }
 
 export function SidebarComponent({ className }: Props) {
+  const dispatch = useDispatch();
+
   const [showConfigModal, setShowConfigModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [tagEditSelected, setTagEditSelected] = useState(null);
@@ -32,32 +37,48 @@ export function SidebarComponent({ className }: Props) {
       className={className}
       bgColor="teal.700">
 
+      <Box width="100%" display="flex" justifyContent="end" pr={3} pt={3}>
+        <Button
+          className="responsive-sidebar-close-button"
+          variant="outline"
+          colorScheme="whiteAlpha"
+          size="sm"
+          onClick={() => dispatch(toggleSidebar())}>
+          <Text fontWeight="normal">Close menu</Text>
+        </Button>
+      </Box>
+
       <Box px={4} className="head-text">
         <Text color="white" fontSize="5xl" fontWeight="bold">Locky</Text>
-        <Text color="whiteAlpha.700" fontSize="1xl">Password manager</Text>
+        <Text color="whiteAlpha.700" fontSize="1xl">Save your credentials</Text>
+        <Text color="whiteAlpha.600" fontSize="xs" >Version: {appVersion}</Text>
       </Box>
 
       <hr className="app-divider"/>
 
-      <SidebarTagsGroupComponent
-        handleTagEditSelected={handleTagEditSelected}/>
+      <Box display="flex" justifyContent="space-between" flexDirection="column">
+        <Box className="top">
+          <SidebarTagsGroupComponent
+            handleTagEditSelected={handleTagEditSelected}/>
 
-      <SidebarButton
-        handleClick={handleSetModal}
-        title="Create a new tag" />
+          <SidebarButton
+            handleClick={handleSetModal}
+            title="Create a new tag" />
 
-      <SidebarButton
-        handleClick={handleSetConfigModal}
-        title="Configuration" />
+          <SidebarButton
+            handleClick={handleSetConfigModal}
+            title="Configuration" />
 
-      { showModal && <SidebarTagsCreationModalComponent
-        setShowModal={setShowModal}
-        tagEditSelected={tagEditSelected} />
-      }
+          { showModal && <SidebarTagsCreationModalComponent
+            setShowModal={setShowModal}
+            tagEditSelected={tagEditSelected} />
+          }
 
-      { showConfigModal && <SettingsModalComponent
-        handleSetConfigModal={handleSetConfigModal} />
-      }
+          { showConfigModal && <SettingsModalComponent
+            handleSetConfigModal={handleSetConfigModal} />
+          }
+        </Box>
+      </Box>
     </Box>
   );
 }

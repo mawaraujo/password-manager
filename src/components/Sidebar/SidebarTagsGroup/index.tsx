@@ -30,7 +30,13 @@ function SidebarTags(props: Props) {
   };
 
   return (
-    <Box mt={3} color="white">
+    <Box
+      className="scroll-style"
+      maxHeight={300}
+      height="100%"
+      overflowY="auto"
+      mt={3}
+      color="white">
       {
         TAGS_STATE.tags && TAGS_STATE.tags.map((item: Tag) => (
           <Box
