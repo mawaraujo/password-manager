@@ -38,11 +38,11 @@ export default function PasswordTableModalComponent({ handleClose, password }: P
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <PasswordTableModalItemComponent
-            fieldType="Description"
-            handleClipboard={handleClipboard}
-            showClipboardButton={false}
-            fieldValue={password.description} />
+          <Box mb={3}>
+            <Text color="gray.500">
+              {password.description ? password.description : 'No description here. '}
+            </Text>
+          </Box>
 
           <PasswordTableModalItemComponent
             fieldType="Email"

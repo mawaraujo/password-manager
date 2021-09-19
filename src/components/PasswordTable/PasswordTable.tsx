@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { TagState, PasswordState, Password } from '../../core/types/reducers';
 import { Text, Menu, MenuButton, Box, MenuList, MenuItem } from '@chakra-ui/react';
 import useClipboard from '../../hooks/useClipboard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deletePassword } from '../../core/store/actions/passwords';
 import { createNotification } from '../../core/store/actions/notifications';
 import { ConfirmActionModalComponent } from '../ConfirmActionModal';
@@ -65,7 +65,7 @@ function RenderTableItems({ password, handleEdit, handleDelete, setShowViewModal
 
         <Box marginRight={2} color="gray.500" display="flex" rounded="md">
           <Text display="inline-block" fontWeight="bold">
-            {password.email.length ? password.email : password.username}
+            {password.email.length ? password.email : password.username || 'No information available '}
           </Text>
         </Box>
       </Box>
@@ -96,6 +96,7 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
   const [showActionModal, setActionModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [viewModalItem, setViewModalItem]: IviewModalItem = useState(null);
+  const search = useSelector((state: any) => state.search.search);
 
   const handleEdit = (password: Password) => {
     setSelectedPassword(password);
@@ -113,20 +114,9 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
     setActionModal(false);
   };
 
-  const handleDelete = (password: Password) => {
-    setPasswordToDelete(password);
-    setActionModal(true);
-  };
-
-  const handleCancelDelete = () => {
-    setPasswordToDelete(null);
-    setActionModal(false);
-  };
-
-  const closeShowModal = () => {
-    setShowViewModal(false);
-    setViewModalItem(null);
-  };
+  const handleDelete = (password: Password) => (setPasswordToDelete(password), setActionModal(true));
+  const handleCancelDelete = () => (setPasswordToDelete(null), setActionModal(false));
+  const closeShowModal = () => (setShowViewModal(false), setViewModalItem(null));
 
   return (
     <>
@@ -134,7 +124,9 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
         {
           (TAG_STATE.selectedTag.id !== 0) ?
             PASSWORD_STATE.passwords.map((password) => {
-              if (password.tagId === TAG_STATE.selectedTag.id) {
+              if (
+                password.tagId === TAG_STATE.selectedTag.id &&
+                password.name.toLowerCase().includes(search.toLowerCase())) {
                 return <RenderTableItems
                   key={password.token}
                   password={password}
@@ -145,16 +137,18 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
                   handleEdit={handleEdit} />;
               }
             }) :
-            PASSWORD_STATE.passwords.map((password) => (
-              <RenderTableItems
-                key={password.token}
-                password={password}
-                setViewModalItem={setViewModalItem}
-                setShowViewModal={setShowViewModal}
-                handleClipboard={handleClipboard}
-                handleDelete={handleDelete}
-                handleEdit={handleEdit} />
-            ))
+            PASSWORD_STATE.passwords.map((password) => {
+              if (password.name.toLowerCase().includes(search.toLowerCase())) {
+                return <RenderTableItems
+                  key={password.token}
+                  password={password}
+                  setViewModalItem={setViewModalItem}
+                  setShowViewModal={setShowViewModal}
+                  handleClipboard={handleClipboard}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit} />;
+              }
+            })
         }
       </Box>
 
@@ -168,9 +162,7 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
 
       {
         showViewModal &&
-        <PasswordTableModalComponent
-          password={viewModalItem}
-          handleClose={closeShowModal} />
+        <PasswordTableModalComponent password={viewModalItem} handleClose={closeShowModal} />
       }
     </>
   );

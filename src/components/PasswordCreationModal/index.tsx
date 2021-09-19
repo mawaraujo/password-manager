@@ -222,7 +222,7 @@ export function PasswordCreationModalComponent({ showModal, passwordSelected, se
           </Button>
 
           <Button
-            isDisabled={(name !== '' && username !== '' && password !== '' && password !== '') ? false : true}
+            isDisabled={(name !== '' && password !== '') ? false : true}
             onClick={handleSubmit}
             variant="solid"
             bgColor="teal.700"
