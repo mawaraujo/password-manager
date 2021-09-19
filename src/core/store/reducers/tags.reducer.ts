@@ -6,7 +6,7 @@ const store: TagState = {
   tags: [
     {
       id: 0,
-      name: 'All',
+      name: 'All credentials',
       icon: 'all',
     },
   ],

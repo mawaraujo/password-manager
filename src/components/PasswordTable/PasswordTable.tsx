@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { deletePassword } from '../../core/store/actions/passwords';
 import { createNotification } from '../../core/store/actions/notifications';
 import { ConfirmActionModalComponent } from '../ConfirmActionModal';
+import PasswordTableModalComponent from './PasswordTableModal';
 
 declare type Props = {
   TAG_STATE: TagState;
@@ -19,14 +20,25 @@ declare type RenderTableItemsProps = {
   handleClipboard: (val: string | undefined) => void;
   handleEdit: (password: Password) => void;
   handleDelete: (password: Password) => void;
+  setShowViewModal: Function;
+  setViewModalItem: Function;
 }
 
 declare type IpasswordToDelete = [
   passwordToDelete: any,
   setPasswordToDelete: Dispatch<SetStateAction<Password | any>>
 ]
+declare type IviewModalItem = [
+  viewModalItem: any,
+  setViewModalItem: Dispatch<SetStateAction<Password | any>>
+]
 
-function RenderTableItems({ password, handleClipboard, handleEdit, handleDelete }: RenderTableItemsProps) {
+function RenderTableItems({ password, handleEdit, handleDelete, setShowViewModal, setViewModalItem }: RenderTableItemsProps) {
+  const openShowModal = () => {
+    setShowViewModal(true);
+    setViewModalItem(password);
+  };
+
   return (
     <Box
       p={5} mb={3}
@@ -36,7 +48,13 @@ function RenderTableItems({ password, handleClipboard, handleEdit, handleDelete 
       width="100%"
       rounded="xl">
 
-      <Box display="flex" flexDirection="column" cursor="pointer">
+      <Box
+        display="flex"
+        flexDirection="column"
+        cursor="pointer"
+        width="100%"
+        onClick={openShowModal}>
+
         <img
           loading="lazy"
           src={`http://www.google.com/s2/favicons?domain=${password.url || 'http://github.com/'}`}
@@ -76,6 +94,8 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
 
   const [passwordToDelete, setPasswordToDelete]: IpasswordToDelete = useState(null);
   const [showActionModal, setActionModal] = useState(false);
+  const [showViewModal, setShowViewModal] = useState(false);
+  const [viewModalItem, setViewModalItem]: IviewModalItem = useState(null);
 
   const handleEdit = (password: Password) => {
     setSelectedPassword(password);
@@ -103,6 +123,11 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
     setActionModal(false);
   };
 
+  const closeShowModal = () => {
+    setShowViewModal(false);
+    setViewModalItem(null);
+  };
+
   return (
     <>
       <Box display="flex" className="md-column" gridGap={3} p={1}>
@@ -113,6 +138,8 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
                 return <RenderTableItems
                   key={password.token}
                   password={password}
+                  setViewModalItem={setViewModalItem}
+                  setShowViewModal={setShowViewModal}
                   handleClipboard={handleClipboard}
                   handleDelete={handleDelete}
                   handleEdit={handleEdit} />;
@@ -122,6 +149,8 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
               <RenderTableItems
                 key={password.token}
                 password={password}
+                setViewModalItem={setViewModalItem}
+                setShowViewModal={setShowViewModal}
                 handleClipboard={handleClipboard}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit} />
@@ -135,6 +164,13 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
           handleOK={onDelete}
           title="Delete password"
           description="¿Do you want to delete this password? Think twice, it will be deleted forever ☢️." />
+      }
+
+      {
+        showViewModal &&
+        <PasswordTableModalComponent
+          password={viewModalItem}
+          handleClose={closeShowModal} />
       }
     </>
   );
