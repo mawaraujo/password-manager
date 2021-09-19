@@ -36,38 +36,47 @@ function ActionsHeader({ TAG_STATE, selectedPassword, showModal, setShowModal, s
         display="flex"
         justifyContent="space-between"
         flexDirection="column"
+        borderBottom="1px"
+        borderBottomColor="gray.100"
         backgroundColor="white"
         p={4}>
 
-        <Box display="flex" mb={3} borderBottom="1px" borderBottomColor="gray.100" pb={3}>
+        <Box display="flex" mb={3}>
           <Button
             mr={4}
-            backgroundColor="teal.700"
-            color="white"
-            maxWidth={150}
+            color="teal.700"
+            variant="outline"
+            colorScheme="teal"
+            _focus={{ outline: 'none' }}
+            maxWidth={70}
             width="100%"
             onClick={() => dispatch(toggleSidebar())}>
-            Menu
+            <svg xmlns="http://www.w3.org/2000/svg" className="app-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
           </Button>
 
           <Button
-            backgroundColor="teal.700"
-            color="white"
-            maxWidth={150}
+            variant="outline"
+            color="teal.700"
+            colorScheme="teal"
+            _focus={{ outline: 'none' }}
+            maxWidth={70}
             width="100%"
             onClick={() => setShowModal(true)}>
-            Add entry
+            <svg xmlns="http://www.w3.org/2000/svg" className="app-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </Button>
         </Box>
 
         <Box textAlign="right">
           <Input
-            maxWidth={350}
-            variant="outline"
-            border="2px"
-            backgroundColor="white"
-            _focus={{ backgroundColor: 'white', borderColor: 'teal.700' }}
-            placeholder="Quick filter"
+            width="100%"
+            variant="solid"
+            background="gray.100"
+            _placeholder={{ color: 'black' }}
+            placeholder="Quick search"
             onChange={(e) => setSearch(e.target.value)} />
         </Box>
       </Box>

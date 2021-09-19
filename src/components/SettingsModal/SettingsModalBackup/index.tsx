@@ -51,7 +51,7 @@ export function SettingsModalBackupModal({ TAGS, PASSWORDS }: Props) {
   return (
     <Box>
       <Text mb={4} fontWeight="bold" fontSize="xl">
-        Generate a JSON File
+        Generate a Locky JSON File
       </Text>
 
       <Button

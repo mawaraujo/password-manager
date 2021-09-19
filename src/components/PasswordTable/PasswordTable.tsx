@@ -36,11 +36,19 @@ function RenderTableItems({ password, handleClipboard, handleEdit, handleDelete 
       width="100%"
       rounded="xl">
 
-      <Box display="flex" flexDirection="column">
-        <Box fontWeight="bold" color="gray.900" fontSize="xl" mb={1}>{password.name}</Box>
+      <Box display="flex" flexDirection="column" cursor="pointer">
+        <img
+          loading="lazy"
+          src={`http://www.google.com/s2/favicons?domain=${password.url}`}
+          alt={password.name}
+          width="20px" />
+
+        <Box fontWeight="bold" color="gray.900" fontSize="xl">{password.name}</Box>
 
         <Box marginRight={2} color="gray.500" display="flex" rounded="md">
-          <Text display="inline-block" fontWeight="bold">{password.email}</Text>
+          <Text display="inline-block" fontWeight="bold">
+            {password.email.length ? password.email : password.username}
+          </Text>
         </Box>
       </Box>
 
@@ -81,6 +89,8 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
       message: `Entry deleted successfully!`,
       type: 'success',
     }));
+
+    setActionModal(false);
   };
 
   const handleDelete = (password: Password) => {
@@ -95,7 +105,7 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
 
   return (
     <>
-      <Box display="flex" className="md-column" gridGap={3} p={3}>
+      <Box display="flex" className="md-column" gridGap={3} p={1}>
         {
           (TAG_STATE.selectedTag.id !== 0) ?
             PASSWORD_STATE.passwords.map((password) => {
