@@ -1,5 +1,5 @@
 # LOCKY: Password manager
-Created in React JS, Redux, Chakra UI and a little bit of Sass
+Created in React JS, Typescript, Redux, Chakra UI and a little bit of Sass
 
 ### Configuration
 1. Run ```yarn``` to install the app dependencies
