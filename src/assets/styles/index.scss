@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap');
 
-$sidebar-width: 230px;
+:root {
+  --sidebar-width: 230px;
+}
 
 body {
   font-family: 'Urbanist', sans-serif !important;
 }
 
 .app-sidebar {
-  max-width: $sidebar-width;
-  width: $sidebar-width;
+  max-width: var(--sidebar-width);
+  width: var(--sidebar-width);
   height: 100vh;
   overflow-y: auto;
   float: left;
@@ -41,8 +43,8 @@ body {
 }
 
 .app-content {
-  width: calc(100% - $sidebar-width);
-  min-width: calc(100% - $sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  min-width: calc(100% - var(--sidebar-width));
   height: 100vh;
   overflow-y: auto;
 }
