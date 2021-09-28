@@ -9,10 +9,10 @@ export function HomeLayout(props: Props) {
   const showSidebar = useSelector((state: any) => state.sidebar.showSidebar);
 
   return (
-    <Container minWidth="full" mx={0} px={0} height="full">
+    <Container className="full-container" minWidth="full" mx={0} px={0} height="full">
       <SidebarComponent className={`app-sidebar ${showSidebar ? 'active' : ''}`} />
 
-      <Box className="app-content">
+      <Box className={`app-content`}>
         { props.children }
       </Box>
     </Container>
