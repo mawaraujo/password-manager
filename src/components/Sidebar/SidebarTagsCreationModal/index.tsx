@@ -69,7 +69,7 @@ export function SidebarTagsCreationModalComponent({ tagEditSelected, setShowModa
           </FormControl>
 
           <FormLabel fontWeight="bold" color="gray.500">Tag icon</FormLabel>
-          <Grid my={3} templateColumns="repeat(5, 1fr)" gap={6}>
+          <Grid my={3} templateColumns="repeat(4, 1fr)" gap={6}>
             {
               iconsList.map((icon) => (
                 <Box
