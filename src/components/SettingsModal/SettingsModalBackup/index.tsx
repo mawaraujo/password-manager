@@ -90,7 +90,7 @@ export function SettingsModalBackupModal({ TAGS, PASSWORDS }: Props) {
             onChange={(e: any) => setFile(e.target.files[0]) } />
 
           <Button
-            background="gray.400"
+            background="gray.300"
             maxWidth="150px"
             width="100%"
             disabled={file ? false : true}

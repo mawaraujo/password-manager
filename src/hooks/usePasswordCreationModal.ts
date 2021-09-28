@@ -13,14 +13,26 @@ export default function usePasswordCreationModal(setShowModal: Function) {
   const [url, setUrl] = useState('');
   const [tagId, setTagId] = useState('');
 
+  const cleanForm = () => {
+    setName('');
+    setDescription('');
+    setUsername('');
+    setEmail('');
+    setPassword('');
+    setUrl('');
+    setTagId('');
+  };
+
   const handleEdit = (token: string | number) => {
     dispatch(editPassword({ token, name, description, username, email, password, url, tagId }));
     setShowModal(false);
+    cleanForm();
   };
 
   const handleCreate = (token: string | number) => {
     dispatch(createPassword({ token, name, description, username, email, password, url, tagId }));
     setShowModal(false);
+    cleanForm();
   };
 
   const handleSetTag = (tag: any) => setTagId(tag);
