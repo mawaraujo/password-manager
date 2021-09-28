@@ -11,15 +11,17 @@ declare type Props = {
 export function SettingsModalContentOptionComponent({ selectedTab, setSelectedTab, optionName, optionValue }: Props) {
   return (
     <Text
-      p={5}
+      p={3}
       my="auto"
       cursor="pointer"
-      fontSize="xl"
-      color={ selectedTab === optionValue ? 'white' : '' }
-      background={ selectedTab === optionValue ? 'teal.700' : '' }
+      fontSize="lg"
+      marginRight={2}
+      borderRadius="md"
+      color={ selectedTab === optionValue ? 'gray.800' : '' }
+      background={ selectedTab === optionValue ? 'gray.200' : '' }
       _hover={{
-        backgroundColor: 'teal.600',
-        color: 'white',
+        backgroundColor: 'gray.100',
+        color: 'gray.600',
       }}
       onClick={() => setSelectedTab(optionValue)}>
       { optionName ? optionName : 'Option name' }

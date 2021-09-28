@@ -50,54 +50,51 @@ export function SettingsModalBackupModal({ TAGS, PASSWORDS }: Props) {
 
   return (
     <Box>
-      <Box background="gray.100" borderRadius="lg" p={4}>
-        <Text fontWeight="bold" fontSize="xl">
-          Generate a backup
-        </Text>
+      <Text fontWeight="bold" fontSize="xl">
+        Generate a backup
+      </Text>
 
-        <Text mb={4}>
-          Create a backup of your passwords. You can import this information whenever you want!
+      <Text mb={4}>
+        Create a backup of your passwords. You can import this information whenever you want!
+      </Text>
+
+      <Button
+        mb={6}
+        onClick={() => exportAsJSONFile(TAGS, PASSWORDS)}>
+        Export data
+      </Button>
+
+      <hr className="hr"/>
+
+      <Text
+        mt={6}
+        fontWeight="bold"
+        fontSize="xl">
+        Import backup
+      </Text>
+
+      <Text>
+        Import your backup of your passwords.
+      </Text>
+
+      {
+        uploadError && <Text color="red.700" fontWeight="bold" fontSize="xs">
+          An error occurred while trying to upload the file. Try again.
         </Text>
+      }
+
+      <Box display="flex" alignItems="center" mt={4}>
+        <Input
+          mr={3}
+          type="file"
+          onChange={(e: any) => setFile(e.target.files[0]) } />
 
         <Button
-          background="gray.300"
-          onClick={() => exportAsJSONFile(TAGS, PASSWORDS)}>
-          Export data
-        </Button>
-      </Box>
-
-      <Box background="gray.100" borderRadius="lg" p={4} mt={2}>
-        <Text
-          fontWeight="bold"
-          fontSize="xl">
+          px={3}
+          disabled={file ? false : true}
+          onClick={handleImportFile}>
           Import backup
-        </Text>
-
-        <Text>
-          Import your backup of your passwords.
-        </Text>
-
-        {
-          uploadError && <Text color="red.700" fontWeight="bold" fontSize="xs">
-          An error occurred while trying to upload the file. Try again.
-          </Text>
-        }
-
-        <Box display="flex" alignItems="center" mt={4}>
-          <Input
-            mr={3}
-            type="file"
-            onChange={(e: any) => setFile(e.target.files[0]) } />
-
-          <Button
-            background="gray.400"
-            maxWidth="150px"
-            width="100%"
-            disabled={file ? false : true}
-            onClick={handleImportFile}>
-            Import backup
-          </Button>
-        </Box>
+        </Button>
       </Box>
     </Box>
   );

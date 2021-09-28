@@ -24,20 +24,31 @@ export function SettingsModalSystemComponent() {
 
   return (
     <Box>
-      <Text mb={4} fontWeight="bold" fontSize="xl">
-        Restore application defaults
-      </Text>
+      <Box background="gray.100" borderRadius="lg" p={4}>
+        <Text fontWeight="bold" fontSize="xl">
+          Restore application defaults
+        </Text>
 
-      <Button onClick={() => setShowResetModal(true)}>Restore app</Button>
+        <Text mb={4}>
+          This action will remove your passwords completely
+        </Text>
 
-      {
-        showResetModal &&
-        <ConfirmActionModalComponent
-          handleOK={handleResetApp}
-          handleCancel={() => setShowResetModal(false)}
-          title="Restore app"
-          description="Are you sure of this? This action will be irreversible" />
-      }
+        <Button
+          colorScheme="red"
+          onClick={() => setShowResetModal(true)}>
+          Restore the application
+        </Button>
+
+        {
+          showResetModal &&
+          <ConfirmActionModalComponent
+            handleOK={handleResetApp}
+            handleCancel={() => setShowResetModal(false)}
+            title="Restore the application"
+            colorScheme="red"
+            description="Do you want to continue? This action will be irreversible" />
+        }
+      </Box>
     </Box>
   );
 }

@@ -8,25 +8,29 @@ export function SettingsModalContentComponent() {
   const [selectedTab, setSelectedTab] = useState('backup');
 
   return (
-    <Box className="left-modal" display="flex" height="100%" minHeight={400}>
+    <Box
+      className="left-modal"
+      display="flex"
+      flexDirection="column"
+      height="100%"
+      minHeight={400}>
+
       <Box
-        borderRight="1px"
-        borderRightColor="gray.300"
         className="tabs"
         width="100%"
-        minHeight="100%"
-        maxWidth={200}>
+        p={3}
+        display="flex">
 
         <SettingsModalContentOptionComponent
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
-          optionName="Backup Data"
+          optionName="Backup"
           optionValue="backup" />
 
         <SettingsModalContentOptionComponent
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
-          optionName="System"
+          optionName="System settings"
           optionValue="system" />
       </Box>
 
