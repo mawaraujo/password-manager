@@ -39,9 +39,11 @@ body {
 }
 
 .full-container {
-  .app-sidebar.active ~ .app-content {
-    width: calc(100% - 230px);
-    min-width: calc(100% - 230px);
+  @media (min-width: 768px) {
+    .app-sidebar.active ~ .app-content {
+      width: calc(100% - 230px);
+      min-width: calc(100% - 230px);
+    }
   }
 }
 
