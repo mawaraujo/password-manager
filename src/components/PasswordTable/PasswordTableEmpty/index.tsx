@@ -9,7 +9,7 @@ export function PasswordTableEmptyComponent() {
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
-      h="xl">
+      mt={10}>
 
       <Text fontSize="3xl" fontWeight="bold" mb={2}>
         Empty Passwords
