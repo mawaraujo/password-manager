@@ -1,26 +1,12 @@
 import React, { useState } from 'react';
 import { Box, Text, Button } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
-import { createNotification } from '../../../core/store/actions/notifications';
+
 import { ConfirmActionModalComponent } from '../../ConfirmActionModal';
+import { useResetSystem } from '../../../hooks/useResetSystem';
 
 export function SettingsModalSystemComponent() {
-  const dispatch = useDispatch();
   const [showResetModal, setShowResetModal] = useState(false);
-
-  const handleResetApp = () => {
-    let counter = 6;
-    window.localStorage.removeItem('persist:root');
-
-    dispatch(createNotification({ type: 'success', message: 'Application restored successfully' }));
-
-    setInterval(() => {
-      if (counter <= 1) return location.reload();
-
-      counter--;
-      return dispatch(createNotification({ type: 'warning', message: `Reloading app in ${counter}` }));
-    }, 1000);
-  };
+  const { resetApp } = useResetSystem();
 
   return (
     <Box>
@@ -42,7 +28,7 @@ export function SettingsModalSystemComponent() {
         {
           showResetModal &&
           <ConfirmActionModalComponent
-            handleOK={handleResetApp}
+            handleOK={resetApp}
             handleCancel={() => setShowResetModal(false)}
             title="Restore the application"
             colorScheme="red"

@@ -31,7 +31,7 @@ export function ActionModalComponent({ onClose, onAccept, title, description }: 
         <ModalHeader>{ title ? title : 'Modal body' }</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text fontWeight="bold" mb="1rem">
+          <Text mb="1rem">
             { description ? description : '' }
           </Text>
         </ModalBody>

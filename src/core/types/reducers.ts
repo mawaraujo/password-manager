@@ -58,3 +58,18 @@ export declare type SearchState = {
 export declare type SidebarState = {
   showSidebar: Boolean;
 }
+
+/**
+ * @description User types
+ */
+export declare type UserState = {
+  hasAccess: Boolean;
+}
+
+/**
+ * @description User password types
+ */
+export declare type UserPasswordState = {
+  password: String | null;
+}
+

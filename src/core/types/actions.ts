@@ -24,3 +24,6 @@ export const DELETE_NOTIFICATION: string = 'DELETE_NOTIFICATION';
 export const UPDATE_SEARCH: string = 'UPDATE_SEARCH';
 
 export const TOGGLE_SIDEBAR: string = 'TOGGLE_SIDEBAR';
+
+export const CREATE_USER_PASSWORD_ACCESS: string = 'CREATE_USER_PASSWORD_ACCESS';
+export const EDIT_USER_HAS_ACCESS: string = 'EDIT_USER_HAS_ACCESS';

@@ -8,6 +8,8 @@ import { passwordReducer } from '../reducers/passwords.reducer';
 import { searchReducer } from '../reducers/search.reducer';
 import { sidebarReducer } from '../reducers/sidebar.reducer';
 import { tagReducer } from '../reducers/tags.reducer';
+import { userReducer } from '../reducers/user.reducer';
+import { userPasswordReducer } from '../reducers/userPassword.reducer';
 
 declare global {
   interface Window { // eslint-disable-line no-unused-vars
@@ -18,7 +20,7 @@ declare global {
 const persistConfig = {
   key: 'root',
   storage: storage,
-  whitelist: ['tags', 'passwords'],
+  whitelist: ['tags', 'passwords', 'userPassword'],
   transforms: [
     encryptTransform({
       secretKey: process.env.REACT_APP_SECRET_STATE_PASS ?? 'YOUR_SECRET_PASSWORD',
@@ -35,6 +37,8 @@ const reducers = combineReducers({
   notifications: notificationReducer,
   search: searchReducer,
   sidebar: sidebarReducer,
+  user: userReducer,
+  userPassword: userPasswordReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
