@@ -55,27 +55,20 @@ export function SettingsModalBackupModal({ TAGS, PASSWORDS }: Props) {
           Generate a backup
         </Text>
 
-        <Text mb={4}>
-          Create a backup of your passwords. You can import this information whenever you want!
+        <Text mb={4} textColor="gray.500">
+          Download a backup of your credentials
         </Text>
 
         <Button
           background="gray.300"
           onClick={() => exportAsJSONFile(TAGS, PASSWORDS)}>
-          Export data
+          Download
         </Button>
       </Box>
 
       <Box background="gray.100" borderRadius="lg" p={4} mt={2}>
-        <Text
-          fontWeight="bold"
-          fontSize="xl">
-          Import backup
-        </Text>
-
-        <Text>
-          Import your backup of your passwords.
-        </Text>
+        <Text fontWeight="bold" fontSize="xl">Import backup</Text>
+        <Text textColor="gray.500">Import your backup of your passwords.</Text>
 
         {
           uploadError && <Text color="red.700" fontWeight="bold" fontSize="xs">

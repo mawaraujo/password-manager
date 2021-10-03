@@ -31,6 +31,7 @@ export function SettingsModalComponent({ handleSetConfigModal }: Props) {
           <SettingsModalContentComponent />
 
           <Box
+            textAlign="right"
             display="flex"
             justifyContent="end"
             p={3}>
@@ -39,7 +40,7 @@ export function SettingsModalComponent({ handleSetConfigModal }: Props) {
               background="teal.700"
               color="white"
               onClick={handleClose}>
-              Close settings
+              Close
             </Button>
           </Box>
         </ModalBody>

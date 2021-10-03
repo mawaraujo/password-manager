@@ -11,17 +11,10 @@ export function SettingsModalSystemComponent() {
   return (
     <Box>
       <Box background="gray.100" borderRadius="lg" p={4}>
-        <Text fontWeight="bold" fontSize="xl">
-          Restore application defaults
-        </Text>
+        <Text fontWeight="bold" fontSize="xl">Restore application defaults</Text>
+        <Text mb={4} color="gray.500">This action will remove your passwords completely</Text>
 
-        <Text mb={4}>
-          This action will remove your passwords completely
-        </Text>
-
-        <Button
-          colorScheme="red"
-          onClick={() => setShowResetModal(true)}>
+        <Button colorScheme="red" onClick={() => setShowResetModal(true)}>
           Restore the application
         </Button>
 

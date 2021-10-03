@@ -15,7 +15,7 @@ export function useNotification() {
         status: notification.type || 'error',
         duration: notification.duration || 5000,
         isClosable: notification.isClosable || true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
 
       dispatch(deleteNotification(notification));

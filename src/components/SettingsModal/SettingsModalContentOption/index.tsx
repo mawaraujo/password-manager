@@ -17,10 +17,11 @@ export function SettingsModalContentOptionComponent({ selectedTab, setSelectedTa
       fontSize="lg"
       marginRight={2}
       borderRadius="md"
+      fontWeight={selectedTab === optionValue ? 'bold' : 'normal'}
       color={ selectedTab === optionValue ? 'gray.800' : '' }
-      background={ selectedTab === optionValue ? 'gray.200' : '' }
+      background={ selectedTab === optionValue ? 'gray.100' : '' }
       _hover={{
-        backgroundColor: 'gray.100',
+        backgroundColor: 'gray.50',
         color: 'gray.600',
       }}
       onClick={() => setSelectedTab(optionValue)}>

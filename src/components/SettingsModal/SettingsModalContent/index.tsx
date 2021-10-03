@@ -3,6 +3,7 @@ import { Box } from '@chakra-ui/react';
 import { SettingsModalBackupComponent } from '../SettingsModalBackup';
 import { SettingsModalContentOptionComponent } from '../SettingsModalContentOption';
 import { SettingsModalSystemComponent } from '../SettingsModalSystem';
+import { SettingsModalUserComponent } from '../SettingsModalUser';
 
 export function SettingsModalContentComponent() {
   const [selectedTab, setSelectedTab] = useState('backup');
@@ -30,12 +31,19 @@ export function SettingsModalContentComponent() {
         <SettingsModalContentOptionComponent
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
+          optionName="User"
+          optionValue="user" />
+
+        <SettingsModalContentOptionComponent
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
           optionName="System settings"
           optionValue="system" />
       </Box>
 
-      <Box flex={1} p={6}>
+      <Box flex={1} p={3}>
         { selectedTab === 'backup' && <SettingsModalBackupComponent /> }
+        { selectedTab === 'user' && <SettingsModalUserComponent /> }
         { selectedTab === 'system' && <SettingsModalSystemComponent /> }
       </Box>
     </Box>

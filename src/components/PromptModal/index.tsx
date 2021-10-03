@@ -80,7 +80,9 @@ export function PrompModalComponent({
               placeholder="abcde12345" />
           </FormControl>
 
-          {(inputWrong && inputWrongText) && <Text color="red.600">{inputWrongText}</Text>}
+          {(inputWrong && inputWrongText) && <Text color="red.600" fontSize="xs" mt={2}>
+            {inputWrongText}
+          </Text>}
         </ModalBody>
 
         <ModalFooter>
