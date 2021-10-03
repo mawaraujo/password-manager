@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Password } from '../../core/types/reducers';
-import { Text, Menu, MenuButton, Box, MenuList, MenuItem } from '@chakra-ui/react';
+import { Text, Menu, MenuButton, Box, MenuList, MenuItem, useMediaQuery } from '@chakra-ui/react';
 import useClipboard from '../../hooks/useClipboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePassword } from '../../core/store/actions/passwords';
@@ -75,9 +75,11 @@ export function PasswordTableComponent({ TAG_STATE, PASSWORD_STATE, setSelectedP
   const handleCancelDelete = () => (setPasswordToDelete(null), setActionModal(false));
   const closeShowModal = () => (setShowViewModal(false), setViewModalItem(null));
 
+  const [isLargerThan1280] = useMediaQuery('(min-width: 800px)');
+
   return (
     <>
-      <Box display="flex" className="md-column" gridGap={3} p={1}>
+      <Box display="grid" gridTemplateColumns={ isLargerThan1280 ? 'repeat(2, 1fr)' : '1fr'} className="md-column" p={1}>
         {
           (TAG_STATE.selectedTag.id !== 0) ?
             PASSWORD_STATE.passwords.map((password) => {

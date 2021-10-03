@@ -5,8 +5,8 @@ body {
 }
 
 .app-sidebar {
-  max-width: 230px;
-  width: 230px;
+  max-width: 280px;
+  width: 280px;
   height: 100vh;
   overflow-y: auto;
   float: left;
@@ -41,8 +41,8 @@ body {
 .full-container {
   @media (min-width: 768px) {
     .app-sidebar.active ~ .app-content {
-      width: calc(100% - 230px);
-      min-width: calc(100% - 230px);
+      width: calc(100% - 280px);
+      min-width: calc(100% - 280px);
     }
   }
 }
