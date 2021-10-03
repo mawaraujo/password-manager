@@ -29,7 +29,7 @@ export function AuthComponent() {
         <PrompModalComponent
           isClosable={false}
           title="Creating an access code"
-          description="Welcome, to start you must create a security key"
+          description="Welcome, to start you must create an access code"
           onAccept={generatePassword}
           onCloseModal={() => false}
           value={inputPassword}
