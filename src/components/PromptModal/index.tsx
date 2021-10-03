@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Button,
@@ -39,9 +39,15 @@ export function PrompModalComponent({
   inputWrong = false,
   inputWrongText,
 }: Props) {
-  const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>): void => {
     if (e.key === 'Enter') return onAccept(value);
   };
+
+  useEffect(() => {
+    setTimeout(() => inputRef?.current?.focus(), 0);
+  }, []);
 
   return (
     <Modal
@@ -66,20 +72,15 @@ export function PrompModalComponent({
 
           <FormControl mt={3}>
             <Input
-              style={ inputWrong ? {
-                borderWidth: 2,
-                borderColor: 'red',
-              } : {}}
+              ref={inputRef}
+              style={inputWrong ? {borderWidth: 2, borderColor: 'red'} : {}}
               type={inputType}
               focusBorderColor={inputWrong ? 'none' : 'teal.700'}
               onChange={(e) => setValue(e.target.value)}
               placeholder="abcde12345" />
           </FormControl>
 
-          {
-            (inputWrong && inputWrongText) &&
-            <Text color="red.600">{inputWrongText}</Text>
-          }
+          {(inputWrong && inputWrongText) && <Text color="red.600">{inputWrongText}</Text>}
         </ModalBody>
 
         <ModalFooter>
