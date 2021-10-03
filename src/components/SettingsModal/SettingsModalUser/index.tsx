@@ -25,7 +25,7 @@ export function SettingsModalUserComponent() {
 
       dispatch(createNotification({
         type: 'success',
-        message: 'Password updated successfully',
+        message: 'Access code updated successfully',
       }));
 
       return clearForm();
@@ -34,14 +34,14 @@ export function SettingsModalUserComponent() {
     setPasswordMismatch(true);
     return dispatch(createNotification({
       type: 'error',
-      message: 'The current password does not match',
+      message: 'The current access code does not match',
     }));
   };
 
   return (
     <Box>
       <Box background="gray.100" borderRadius="lg" p={4}>
-        <Text fontWeight="bold" fontSize="xl" mb={3}>Update password</Text>
+        <Text fontWeight="bold" fontSize="xl" mb={3}>Update the access code</Text>
 
         <Box>
           <FormControl>
@@ -74,7 +74,7 @@ export function SettingsModalUserComponent() {
             mt={5}
             onClick={updatePassword}
             background="gray.300">
-            Update password
+            Update changes
           </Button>
         </Box>
       </Box>

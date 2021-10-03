@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Text, Button } from '@chakra-ui/react';
+import { Box, Text, Button, Link } from '@chakra-ui/react';
 
 import { ConfirmActionModalComponent } from '../../ConfirmActionModal';
 import { useResetSystem } from '../../../hooks/useResetSystem';
@@ -27,6 +27,12 @@ export function SettingsModalSystemComponent() {
             colorScheme="red"
             description="Do you want to continue? This action will be irreversible" />
         }
+      </Box>
+
+      <Box borderRadius="lg" p={4} mt={2} textAlign="center">
+        <Text fontSize="xl">
+          Created by <Link href="https://github.com/mawaraujo" color="teal.700" textDecoration="underline" target="__blank">Mauro Araujo</Link>
+        </Text>
       </Box>
     </Box>
   );
