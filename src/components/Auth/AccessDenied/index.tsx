@@ -9,6 +9,7 @@ export function AccessDeniedComponent() {
 
   return (
     <Box
+      p={5}
       mx="auto"
       height="100vh"
       maxWidth="md"
