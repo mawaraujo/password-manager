@@ -1,6 +1,9 @@
 # LOCKY: Password manager
 Created in React JS, Typescript, Redux, Chakra UI and a little bit of Sass
 
+### Try it on
+https://locky.netlify.app
+
 ### Configuration
 1. Run ```yarn``` to install the app dependencies
 2. Run ```yarn start``` to run the app
