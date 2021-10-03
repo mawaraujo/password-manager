@@ -37,14 +37,15 @@ export function SidebarComponent({ className }: Props) {
       className={className}
       bgColor="teal.700">
 
-      <Box width="100%" display="flex" justifyContent="end" pr={3} pt={3}>
+      <Box width="100%" minWidth="100%" pr={3} pt={3}>
         <Button
           className="responsive-sidebar-close-button"
           variant="outline"
           colorScheme="whiteAlpha"
           size="sm"
+          ml="auto"
           onClick={() => dispatch(toggleSidebar())}>
-          <Text fontWeight="normal">Close menu</Text>
+          <Text fontWeight="bold" color="white">Close menu</Text>
         </Button>
       </Box>
 
