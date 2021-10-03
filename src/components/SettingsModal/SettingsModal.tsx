@@ -26,21 +26,21 @@ export function SettingsModalComponent({ handleSetConfigModal }: Props) {
   return (
     <Modal isOpen={true} onClose={handleClose}>
       <ModalOverlay />
-      <ModalContent p={0} style={{ maxWidth: 680 }} rounded={0}>
+      <ModalContent p={0} style={{ maxWidth: 680 }}>
         <ModalBody p={0}>
           <SettingsModalContentComponent />
 
           <Box
+            width="100%"
+            minWidth="100%"
             textAlign="right"
-            display="flex"
-            justifyContent="end"
-            p={3}>
+            px={3} pb={3}>
 
             <Button
-              background="teal.700"
-              color="white"
+              display="inline-block"
+              background="ghost"
               onClick={handleClose}>
-              Close
+              Close settings
             </Button>
           </Box>
         </ModalBody>
