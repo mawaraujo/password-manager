@@ -30,7 +30,7 @@ export function SettingsModalSystemComponent() {
       </Box>
 
       <Box borderRadius="lg" p={4} mt={2} textAlign="center">
-        <Text fontSize="xl">
+        <Text fontSize="md">
           Created by <Link href="https://github.com/mawaraujo" color="teal.700" textDecoration="underline" target="__blank">Mauro Araujo</Link>
         </Text>
       </Box>
