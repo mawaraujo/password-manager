@@ -1,6 +1,5 @@
 import { Box, Text, Button } from '@chakra-ui/react';
-import { IconGenerator } from '../../IconGenerator';
-import React from 'react';
+import { IconGenerator } from '../IconGenerator';
 
 declare type Props = {
   fieldType?: String;
@@ -9,7 +8,7 @@ declare type Props = {
   showClipboardButton?: Boolean;
 }
 
-export default function PasswordTableModalItemComponent({ fieldType, fieldValue, handleClipboard, showClipboardButton = true }: Props) {
+export function DetailsModalFieldComponent({ fieldType, fieldValue, handleClipboard, showClipboardButton = true }: Props) {
   return (
     <Box
       display="flex"

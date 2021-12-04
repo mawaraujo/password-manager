@@ -24,6 +24,7 @@
         "linebreak-style": "off",
         "object-curly-spacing": "off",
         "indent": ["error", 2],
-        "max-len": "off"
+        "max-len": "off",
+        "react/react-in-jsx-scope": "off"
     }
 }

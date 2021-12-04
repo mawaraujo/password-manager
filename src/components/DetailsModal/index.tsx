@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   Modal,
   ModalOverlay,
@@ -10,16 +8,17 @@ import {
   Text,
   Box,
 } from '@chakra-ui/react';
-import { Password } from '../../../core/types/reducers';
-import PasswordTableModalItemComponent from '../PasswordTableModalItem';
-import useClipboard from '../../../hooks/useClipboard';
+
+import { Password } from '../../core/types/reducers';
+import { DetailsModalFieldComponent } from '../DetailsModalField';
+import useClipboard from '../../hooks/useClipboard';
 
 declare type Props = {
   handleClose: () => void;
   password: Password;
 }
 
-export default function PasswordTableModalComponent({ handleClose, password }: Props) {
+export function DetailsModalComponent({ handleClose, password }: Props) {
   const { handleClipboard } = useClipboard();
 
   return (
@@ -44,22 +43,22 @@ export default function PasswordTableModalComponent({ handleClose, password }: P
             </Text>
           </Box>
 
-          <PasswordTableModalItemComponent
+          <DetailsModalFieldComponent
             fieldType="Email"
             handleClipboard={handleClipboard}
             fieldValue={password.email} />
 
-          <PasswordTableModalItemComponent
+          <DetailsModalFieldComponent
             fieldType="Username"
             handleClipboard={handleClipboard}
             fieldValue={password.username} />
 
-          <PasswordTableModalItemComponent
+          <DetailsModalFieldComponent
             fieldType="Password"
             handleClipboard={handleClipboard}
             fieldValue={password.password} />
 
-          <PasswordTableModalItemComponent
+          <DetailsModalFieldComponent
             fieldType="URL"
             handleClipboard={handleClipboard}
             fieldValue={password.url} />

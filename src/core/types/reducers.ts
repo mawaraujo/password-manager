@@ -73,3 +73,16 @@ export declare type UserPasswordState = {
   password: String | null;
 }
 
+
+/**
+ * @description App reducers list
+ */
+export declare type AppState = {
+  passwords: PasswordState;
+  tags: TagState;
+  notifications: NotificationState;
+  search: SearchState;
+  sidebar: SidebarState;
+  user: UserState;
+  userPassword: UserPasswordState;
+}
