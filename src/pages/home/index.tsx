@@ -4,7 +4,7 @@ import { NotificationState, UserState } from '../../core/types/reducers';
 import { connect } from 'react-redux';
 import { useNotification } from '../../hooks/useNotification';
 import { ActionsHeaderComponent } from '../../components/ActionsHeader';
-// import { AuthComponent } from '../../components/Auth';
+import { AuthComponent } from '../../components/Auth';
 import { useUserAccess } from '../../hooks/useAccess';
 import { DatatableComponent } from '../../components/Datatable';
 
@@ -30,7 +30,7 @@ function HomePage({ NOTIFICATIONS_STATE, USER_STATE }: Props) {
     };
   }, []);
 
-  // if (!USER_STATE.hasAccess) return <AuthComponent />;
+  if (!USER_STATE.hasAccess) return <AuthComponent />;
 
   return (
     <HomeLayout>
